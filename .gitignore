@@ -87,3 +87,9 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# visual studio code
+.vscode/
+
+# dummy sqlite databases
+*.db
