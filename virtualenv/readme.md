@@ -35,7 +35,7 @@ Note again that virtual environments with python executables are *independent* f
 
 To document what libraries and versions your code uses use `pip freeze` and `pip install`.
 
-Use `pip freeze > requirements.txt' to save configured libraries and versions
+Use `pip freeze > requirements.txt` to save configured libraries and versions
 
 Use `pip install -r requirements.txt` to install libraries needed to run code
 
