@@ -55,6 +55,7 @@ Setup WORKON_HOME environment variable with directory where you have virtual env
  - `workon` - lists available environments
  - `workon <dir>` - activate specified env
  - `deactivate`
+ - `mkvirtualenv <name>` - creates virtual environment
  - `rmvirtualenv <name>` - removes the environment (uses folder_delete.bat)
  - `cdproject` - If a virtualenv environment is active and a projectdir has been defined, enters the project dir
  - `cd-` - returns you to the last directory before calling cdproject
