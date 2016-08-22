@@ -35,7 +35,7 @@ Note again that virtual environments with python executables are *independent* f
 
 To document what libraries and versions your code uses use `pip freeze` and `pip install`.
 
-Use `pip freeze > requirements.txt' to save configured libraries and versions
+Use `pip freeze > requirements.txt` to save configured libraries and versions
 
 Use `pip install -r requirements.txt` to install libraries needed to run code
 
@@ -55,6 +55,7 @@ Setup WORKON_HOME environment variable with directory where you have virtual env
  - `workon` - lists available environments
  - `workon <dir>` - activate specified env
  - `deactivate`
+ - `mkvirtualenv <name>` - creates and activates virtual environment
  - `rmvirtualenv <name>` - removes the environment (uses folder_delete.bat)
  - `cdproject` - If a virtualenv environment is active and a projectdir has been defined, enters the project dir
  - `cd-` - returns you to the last directory before calling cdproject
