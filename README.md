@@ -7,3 +7,5 @@ Collection of tutorials for various libraries and technologies
  - [Python's Virtual Environment](/virtualenv) - how to setup and manage virtual environments in python
  - [Python](/python) - deep dive into Python's world
 
+
+ 
