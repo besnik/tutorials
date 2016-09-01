@@ -130,7 +130,7 @@ It is possible to create full dump of mysql database running inside container.
 Then you can use generated .sql file to re-create db scructure and all data if needed (remember `~/mysql/initdb.d/` folder?).
 
 To create full dump of mysql database running inside container and store it on the host in folder `~/mysql/dumps` type:
-`docker exec mysql sh -c 'exec mysqldump --all-databases -uroot -p"$MYSQL_ROOT_PASSWORD"' > /home/topper/docker-scripts/mysql/dumps/all-databases.sql`
+`docker exec mysql sh -c 'exec mysqldump --all-databases -uroot -p"$MYSQL_ROOT_PASSWORD"' > /home/[user]/mysql/dumps/all-databases.sql`
 
 
 # How to restore data from full dump?
