@@ -107,6 +107,7 @@ docker run \
 
 Note: you can stop, remove and start mysql image as docker container. The data will be persisted thanks to `~/mysql/data/` mounted volume.
 
+Note2: mysql now runs inside the container so it is visible *only* to host. If you want to expose it outsite of the host to separate servers run image with parameter `-p 3306:3306` that will map mysql port from container to host.
 
 # How to attach shell to the mysql container or how to open mysql client on container?
 
