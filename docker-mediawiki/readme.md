@@ -33,7 +33,7 @@ To summarize - your directory structure should look like this:
 ~/mediawiki/images/
 ```
 
-We will configure mediawiki to run using separate mysql container so no need extra folder to store data. How to setup mysql container you can read in this tutorial reposistory as separate article.
+We will configure mediawiki to run using separate mysql container so no need extra folder to store data. How to setup mysql container you can read in this tutorial reposistory as [separate article](/docker-mysql).
 
 Note: if you decide to go for *sqlite* you don't need mysql instance or mysql container. During mediawiki installation in the browser just select sqlite and you will get full path where .db file of sqlite will be stored in container. On host create `~/mediawiki/db/` folder. It will contain sqlite data files. You will need to mount `db` directory from host to container during docker run so data are not lost.
 
