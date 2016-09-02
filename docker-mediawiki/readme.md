@@ -18,6 +18,8 @@ For purpose of this tutorial we will create it in home directory of the user:
 
 `mkdir ~/mediawiki`
 
+Note in test or production system you want to create this folder in /srv/ directory that fits this purpose.
+
 Next we will create following sub-directories under `mediawiki` directory:
 
  - `config` - we will save here LocalSettings.php that installation script will generate. For sub-sequent start of container this file will be mounted to the mediawiki container.
