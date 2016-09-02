@@ -28,8 +28,12 @@ Note: if you have existing/older container named mysql use `docker rmi mysql` co
 
 Next we prepare host system to store mysql data, configuration and place where to export sql dumps. We will make use mounting volume feature of docker.
 
-For purpose of this tutorial we will organize all data into folder `mysql`. We will create the folder directly in your home directory:
-`mkdir mysql`
+For purpose of this tutorial we will organize all data into folder `mysql`. 
+
+We will create the folder directly in your home directory:
+`mkdir ~/mysql`
+
+Note in production or test system it is better to have this directory under `/srv/` that serves as data for services in Linux.
 
 Inside `mysql/` folder we will create new folders as following:
 
