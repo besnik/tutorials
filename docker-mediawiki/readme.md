@@ -1,6 +1,6 @@
 # Running Mediawiki as Docker container
 
-[Mediawiki](https://www.mediawiki.org) is popular wiki engine that besides other thins powers also Wikipedia. It is based on PHP and supports various SQL databases - preferably Mysql or Sqlite (for smaller deployments). During installation you can decide if you are going to use Sqlite or a standard sql service like Mysql.
+[Mediawiki](https://www.mediawiki.org) is popular wiki engine that besides other thins powers also Wikipedia. It is based on PHP and supports various SQL databases - preferably Mysql or Sqlite (for smaller deployments). During installation you can decide if you are going to use Sqlite or a standard sql service like Mysql. Note that this image depends linked mysql container. If you want to use purely sqlite you need to look after different image.
 
 
 # Getting docker image
