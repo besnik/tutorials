@@ -53,7 +53,7 @@ docker run --name mediawiki \
 
 System will detect that mediawiki is not yet configured and will offer installation wizard. During steps you will be asked for:
 
- - Mysql host or IP (use `docker inspect mysql` to find out IP address of the container with mysql if you run mysql as docker container)
+ - Mysql host or IP (use value you specified in `--link mysql:mysql` param so it our case it would be `mysql`. You could use `docker inspect mysql | grep "IPAddress"` to find out IP address of the container with mysql if you run mysql as docker container but that is not reliable as IP addresses of container changes when you restart host/docker)
  - In case of sqlite mark down full path where data will be stored!
  - User name for mysql
  - Password for mysql
