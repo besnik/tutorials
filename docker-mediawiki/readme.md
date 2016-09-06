@@ -14,11 +14,11 @@ For this demonstration we will use [synctree/mediawiki](https://hub.docker.com/r
 
 Create directory that will hold all persisted data related to media wiki.
 
-For purpose of this tutorial we will create it in home directory of the user:
+For purpose of this tutorial we will create it in `/home/[user]/` directory of the user:
 
 `mkdir ~/mediawiki`
 
-Note in test or production system you want to create this folder in /srv/ directory that fits this purpose.
+Note in test or production system you want to create this folder in `/srv/` directory that fits this purpose!
 
 Next we will create following sub-directories under `mediawiki` directory:
 
@@ -114,6 +114,11 @@ It will take few seconds for system to start up everything.
 
 How you should have Mediawiki running as Docker container with persisted data, images (files), extensions and configuration.
 
+# Adding custom logo
+
+Logo file is located inside container at `/var/www/html/resources/assets/wiki.png` and path to it is configured in `LocalSettings.php` in `$wgLogo`. 
+
+You could put your own logo at host in e.g. `~/mediawiki/resources/assets/mylogo.png` and mount it when running docker image using `-v` parameter like `-v /home/[user]/mediawiki/resources/assets/mylogo.png:/var/www/html/resources/assets/mylogo.png` (add ` \` if you put the param in multi-line statement of your script.
 
 # Next steps
 
