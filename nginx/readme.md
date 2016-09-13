@@ -37,6 +37,7 @@ In the below example we are fowarding http requests to the running docker contai
 
 ```
 ...
+
 http {
 
 ...
