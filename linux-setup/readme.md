@@ -46,6 +46,27 @@ Swich to newly created user:
 
 `sudo su - <name>`
 
+## Permissions and ACL
+
+Changing owner (user:group) of an item: `chown -R myappuser:ormaci /var/www/myapp`
+
+Changing permissions recursively `chmod -R 660 /var/www/myapp/some_file`
+
+Problem with default user:group permissions on file system is that they are not recursive for newly created/modified content.
+
+To explicitely say who should have access to what make use of ACL (like in windows you can specify who can access parent folder and 
+rules will automatically apply to the child items).
+
+```
+getfacl parent_dir
+setfacl -Rdm g:mygroup:rwX parent_dir
+setfacl -Rm g:mygroup:rwX parent_dir
+getfacl parent_dir
+```
+
+- http://superuser.com/questions/151911/how-to-make-new-file-permission-inherit-from-the-parent-directory
+- https://help.ubuntu.com/community/UbuntuLTSP/ACLSupport
+
 
 
 
