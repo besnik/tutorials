@@ -1,4 +1,4 @@
-# Virtual Environments in Python (Windows)
+# Virtual Environments in Python (Windows and Linux)
 
 ## Introduction
 Virtual environments is a way to separate requirements of different applications and code for specific libraries and environment settings.
@@ -14,7 +14,7 @@ It is important to activate virtual env before working with it. Activating will 
 
 ## Creating virtual environment
 Navigate into directory that should hold python executables for virtual environment.
-For example c:\dev\envs\sqlalchemy
+For example `c:\dev\envs\sqlalchemy`
 
 Now type:
 `python -m venv`
@@ -23,12 +23,16 @@ Now type:
 Navitage into directory that holds executables for virtual environment and type:
 `.\scripts\activate`
 
+On linux you type `source ./bin/activate`
+
 Depending if you run the command from cmd or powershell activate.bat or activate1.ps will be executed.
 %PATH% variable will be adapted.
 
 ## Deactivate virtual environment
 Navitage into directory that holds executables for virtual environment and type:
 `.\scripts\deactivate`
+
+On linux you type `deactivate` (command is created with running `activate` script).
 
 ## Managing libraries and versions
 Note again that virtual environments with python executables are *independent* from your source code. Do not commit virtual environment files into source control system like Git or Svn.
@@ -47,7 +51,10 @@ There are tools that can simplify those tasks.
 Virtualenvwrapper is tool with helper functions to easier switch and activate virtual environments.
 
 **Installation**
-`pip install virtualenvwrapper-win`
+
+Windows: `pip install virtualenvwrapper-win`
+
+Linux: `pip install virtualenvwrapper`
 
 Setup WORKON_HOME environment variable with directory where you have virtual environments (e.g. c:\dev\envs)
 
@@ -61,4 +68,25 @@ Setup WORKON_HOME environment variable with directory where you have virtual env
  - `cd-` - returns you to the last directory before calling cdproject
  - `setprojectdir <full or relative path>` - sets project directory (where code is)
 
+## Creating virtual environment using virtualenv
+
+Installation (if not already present):
+
+`sudo apt-get install virtualenv`
+
+Check where is python executable you want to use for virtual env:
+`which python3			# /usr/bin/python3`
+
+Create virtual env using python 3:
+
+```
+mkdir ~/venvs
+virtualenv --python=/usr/bin/python3 ~/venvs/myapp
+```
+
+If there is problem with connecting to network check proxy settings (see linux-setup section) or firewall.
+
+Activate: `source ~/venv/myapp/bin/activate`
+
+Deactivate: `deactivate`
 
