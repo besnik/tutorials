@@ -33,7 +33,7 @@ Nginx runs under `www-data` user by default.
 
 For quick setup or simple apps you might directly extend `/etc/nginx/nginx.conf`.
 
-As example we are fowarding http requests to the running docker containers or gunicorn web server:
+In the below example we are fowarding http requests to the running docker container and gunicorn web server that both sits on the same server as Nginx:
 
 ```
 ...
