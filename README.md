@@ -1,5 +1,5 @@
 # Tutorials
-Collection of tutorials for various libraries and technologies
+Collection of tutorials for various libraries and technologies.
 
 ## List of tutorials
 
