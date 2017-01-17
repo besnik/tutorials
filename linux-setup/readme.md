@@ -67,6 +67,24 @@ getfacl parent_dir
 - http://superuser.com/questions/151911/how-to-make-new-file-permission-inherit-from-the-parent-directory
 - https://help.ubuntu.com/community/UbuntuLTSP/ACLSupport
 
+## Logical Volume Management (LVM) on Linux
 
+Concepts: `HDDs` -> `Physical Volumes (PV)` -> `Volume Group (VG)` -> `Logical Volumes (LV)`
 
+Where:
+
+- `HDDs`: physical hard drives.
+- `Physical Volumes (PV)`: you can partition each HDD as needed.
+- `Volume Group (VG)`: from many HDDs and their physical volumes (partitions) you create Volume Group(s) (VG). This is combined storage space from all partitions from all HDDs. It acts like one big drive (like cloud that you can easily scale).
+- `Logical Volumes (LV)`: create Logical Volumes (like virtual disks) as needed (LV for operating system, LV for swap, LV for /home, LV for static data, LV for volatile data, etc)
+
+LVM concept allows you to create partitions that would not be possible with HDDs.
+For example, take two HDDs where each has capacity of 10GB. With LVM you could combine both into 20GB Volume Group and create two partitions (Logical Volume) of capacity 15GB and 5GB. As bonus you can dynamically increase Volume Group as you add more physical HDDs into system.
+
+Useful commands to display info in console: 
+
+- HDDs: `lsblk` (displays hdds, their partitions and logical volumes)
+- Physical Volumes (PV): `fdisk -l` (displays list of partitions)
+- Volume Group (VG): `vgdisplay --verbose` (displays info about volume group, which physical volumes (hdds and partitions) are used to create VG)
+- Logical Volumes (LV): `lvdisplay --verbose` (displays info about logical volumes and to which VG they belong)
 
