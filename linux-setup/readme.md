@@ -138,7 +138,7 @@ The below describes details on each step:
  
  In Free PE you should see extra storage space you added to your physical volume (partition).
  
-4. Resize `Logical Volume (LV)
+4. Resize `Logical Volume (LV)`
 
  Now we have new free storage space in Volume Group (VG). Lets increase storage in existing Logical Volume (LV).
  
