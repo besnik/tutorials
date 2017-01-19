@@ -69,7 +69,7 @@ getfacl parent_dir
 
 ## Logical Volume Management (LVM) on Linux
 
-Concepts: `HDDs` -> `Physical Volumes (PV)` -> `Volume Group (VG)` -> `Logical Volumes (LV)`
+Concepts: `HDDs` -> `Physical Volumes (PV)` -> `Volume Group (VG)` -> `Logical Volumes (LV)` -> `File System (FS)`
 
 Where:
 
@@ -88,3 +88,79 @@ Useful commands to display info in console:
 - Volume Group (VG): `vgdisplay --verbose` (displays info about volume group, which physical volumes (hdds and partitions) are used to create VG)
 - Logical Volumes (LV): `lvdisplay --verbose` (displays info about logical volumes and to which VG they belong)
 
+### How to enlarge / resize Physical Volume (Partition) and Logical Volume (LVM)
+
+In general you need to follow these steps:
+
+* Resize existing `physical volume (partition)` or add new physical volume
+* Rezising existing PV should automatically create new free space in `Volume Group (VG)`. If addional physical volume (partition) was created, then it needs to be added to Volume Group (VG)
+* Now that VG contains increased capacity you need to extend size of `Logical Partition (LV)`
+* Last step is to resize `file system (FS)` on logical partition (LV) so you can use additional storage space
+
+The below describes details on each step:
+
+1. First take snapshot / backup image of your system in case something goes wrong!
+
+In case of VMware client or VirtualBox take snapshot.
+
+2. Resize existing `Physical Volume (PV)` or create new Physical Volume.
+
+If you allow downtime of your server, easiest way would be to use `gparted` live image.
+Download live image `gparted` that allows you to modify partitions (PV) as you like. 
+Stop the server, boot from live iso image and resize existing partition or create new one.
+For this tutorial we will resize existing partition.
+
+Typically physical partition setup might look like this:
+HDD /dev/sda
+Partitions:
+- /dev/sda1
+- /dev/sda2 (Extended)
+- /dev/sda5 (Linux LVM)
+
+Look after partition you want to extend (in your case sda5) and its container (sda2 - extended partition)
+
+Before resizing: Devices must NOT be busy (mounted or locked). You have to unmount sda5 before operation (right click in gparted on partition and click Disconnect)
+
+You need to first extend /dev/sda2 partition (that is container for sda5) and then extend /dev/sda5. 
+Write changes.
+After operation gparted should automatically mount and lock sda2 and sda5
+
+So now we have resized `Physical Volume (PV)`. 
+
+Unmount live cd and reboot.
+
+3. Check `Volume Group (VG)` size
+
+Type `vgdisplay`
+
+This should show you `Alloc PC` and `Free PE` using `Cur PV` (current physical volumes)
+
+In Free PE you should see extra storage space you added to your physical volume (partition).
+
+4. Resize `Logical Volume (LV)
+
+Now we have new free storage space in Volume Group (VG). Lets increase storage in existing Logical Volume (LV).
+
+Type `lvdisplay` to list existing logical volumes. Pick up one you want to extend and look after its `LV Path`
+
+To resize the logical partition type (replace path template with value in `LV Path` for your logical partition):
+
+`lvextend -l +100%FREE /dev/volume-group-name/logical-volume-name`
+
+5. Resize `File System (FS)`
+
+To make use of additional storage on logical volume we need to let file system know it can consume more space:
+
+Type following to resize file system (if you don't specify size it automatically allocates all free space)
+
+`resize2fs /dev/volume-group-name/logical-volume-name`
+
+6. Done
+
+Enjoy. After testing you could remove backup snapshot to save some storage space.
+
+## Logs
+
+- `cat /var/log/syslog | less` - displays Linux syslog
+- `grep sshd.\*Failed /var/log/auth.log | less` - displays failed SSH login attempts
+- `grep sshd.*Did /var/log/auth.log | less` - displays failed connections
