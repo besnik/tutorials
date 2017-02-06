@@ -65,6 +65,19 @@ http {
 }
 ```
 
+## Redirect to different location and protocol (HTTP 301)
+```
+server {
+        listen 80;
+        server_name my-domain.com;
+        location / {
+            return 301 https://secured-domain.com$request_uri;
+        }
+}
+
+```
+
+
 ## Apps Configuration - Robust
 
 Each Nginx virtual server should be described by a file in the /etc/nginx/sites-available directory. 
