@@ -8,6 +8,7 @@ The code samples are divided into following groups (in that order):
  - MetaData
  - Expressions
  - ORM
+ - Custom (advanced topics like composite foreign keys or composite primary keys)
 
 The approach of learning is bottom-up - learn core things first (how to make raw SQL statements) 
 and build on the top of it to learn how to use ORM and save domain models (objects) to the database of your choice.
@@ -21,59 +22,68 @@ Install SQL Alchemy using `pip install sqlalchemy`
 
 ## IDE Configuration
 
-### Visual Studio Code (Windows)
-Configure `tasks.json` in `.vscode` directory to be able running the code using ctrl+shift+b.
-If you don't use virtual environment and python is part of PATH global variable then command can be just "python".
-To configure VSC with virtual environment you need to specify path to python.
-Last change is to adapt "args" parameter to take current opened `${file}` as parameter when running python.
+### Visual Studio Code
+Define path to python executable and libraries in `settings.json` in `.vscode` directory.
+This could be path to your global python installation or to virtual env.
+If you don't use virtual environment and path to python is part of `PATH` 
+environment variable then `python.pythonPath` can be just "python" (or "python3"
+on some Linux distribution if you intent to run Python 3).
+In the example below we use virtual env:
+
+```javascript
+# On linux specify path in linux format
+{
+    "python.pythonPath":"c:\\path_to_venv\\Scripts\\python.exe",
+    "python.autoComplete.extraPaths": [
+    "c:\\path_to_venv",
+    "c:\\path_to_venv\\Lib",
+    "c:\\path_to_venv\\Lib\\site-packages"
+    ]
+}
+```
+Note: you can determine path to python by typing
+`pip --version`. This prints path to currently active python environment
+(work virtual env make sure the env is activated).
+
+Next configure `tasks.json` in `.vscode` directory to be able running 
+the code using `ctrl+shift+b`. Note change to `command` and `args` parameters.
 
 ```javascript
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "0.1.0",
-    "command": "c:\\path\\to\\python\\in\\virtualenv\\python.exe",
+    "command": "${config.python.pythonPath}",
     "isShellCommand": true,
     "args": ["${file}"],
     "showOutput": "always"
 }
 ```
 
-To configure debugging with virtual environment adapt `launch.json` file in `.vscode` directory.
-You will have to again specify path to python executable in virtual environment.
+To enable debugging configure `launch.json` file in `.vscode` directory.
+Note `pythonPath` and `program` parameters.
 
 ```javascript
 {
     "version": "0.2.0",
     "configurations": [
          {
-            "name": "Python (Alchemy virtual env)",
+            "name": "Python",
             "type": "python",
             "request": "launch",
             "stopOnEntry": true,
+            "pythonPath": "${config.python.pythonPath}",
             "program": "${file}",
-            "pythonPath": "c:\\path\\to\\python\\in\\virtualenv\\python.exe",
+            "cwd": "${workspaceRoot}",
             "debugOptions": [
                 "WaitOnAbnormalExit",
                 "WaitOnNormalExit",
                 "RedirectOutput"
             ]
-        }
+        },
     ]
 }
 ```
 
-To support intellisense and autocomplete you need to define `python.autoComplete.extraPaths` in `settings.json` in `.vscode` directory.
 
-```javascript
-// Place your settings in this file to overwrite default and user settings.
-{
 
-    "python.autoComplete.extraPaths": [
-    "c:\\path\\to\\python\\in\\virtualenv",
-    "c:\\path\\to\\python\\in\\virtualenv\\Lib",
-    "c:\\path\\to\\python\\in\\virtualenv\\Lib\\site-packages" ]
-}
-```
-
-In case of problems, questions or suggestions feel free to send me message or patch. Thank you.
+In case of problems, questions or suggestions feel free to send me message or patch. 
+Thank you.
