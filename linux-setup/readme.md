@@ -8,10 +8,10 @@ To configure system wide environment variables use `/etc/environment` file.
 
 Alternatively you can use `export VARNAME=value` to setup environment variable in active session.
 
-### Setup HTTP Proxy
+## Setup HTTP Proxy
 
 If your system is behind proxy server you might need to configure few env variables so applications can 
-find out which proxy server to use.
+find out which proxy server to use. You also want to specify servers that are internal and your server should connect directly to.
 
 Add following lines into `/etc/environment` for system wide configuration:
 
@@ -20,6 +20,8 @@ HTTP_PROXY="http://proxy.company.com:1234"
 HTTPS_PROXY="http://proxy.company.com:1234"
 http_proxy="http://proxy.company.com:1234"
 https_proxy="http://proxy.company.com:1234"
+NO_PROXY="localhost,127.0.0.1/8,.company.com"
+no_proxy="localhost,127.0.0.1/8,.company.com"
 ```
 
 Unfortunately you have to add both uppper and lower case as different apps reads different keys.
@@ -165,3 +167,42 @@ The below describes details on each step:
 - `cat /var/log/syslog | less` - displays Linux syslog
 - `grep sshd.\*Failed /var/log/auth.log | less` - displays failed SSH login attempts
 - `grep sshd.*Did /var/log/auth.log | less` - displays failed connections
+
+## X.509 certificates (used in SSL/TLS protocols)
+
+X.509 certificate is digital document that has been digitally signed and/or encoded.
+
+Note: SSL protocol in all versions is NOT secure and you shouldn't use it. Always rely on latest version of TLS protocol.
+
+### Certificate Formats
+
+There are multiple formats (encodings) for X.509 certificate.
+And unfortunately different companies use same file extension (e.g. .crt) for different formats (problem is mostly between windows and linux worlds).
+
+- PEM format
+  - ASCII+BASE64 format prefixed with a `—– BEGIN ...`
+  - File extensions: .pem, .cer (linux), .crt (linux), .key (linux - holds private key)
+- DER format
+  - Binary format, windows exports certificate by default in DER format using different extensions! Careful!
+  - File extension: .der, .cer (windows), .crt (windows), key (windows - holds private key)
+  - Convert to PEM using `openssl x509 -inform der -in to-convert.der -out converted.pem`
+
+### Inspect certificate details
+
+On linux type `openssl x509 -in certificate.pem -fingerprint -text -noout`
+
+### Certificate chain
+
+Certificates are usually issues by certificate authority (CA) and chained together using an identifier.
+
+- Each certificate is identified using `X509v3 Subject Key Identifier`.
+- Parent certificate is linked using `X509v3 Authority Key Identifier` 
+
+The above are not serial number of certificates.
+
+When a client is connecting to a server secured with a certificate the client must trust certificate authority (CA) that created the certificate of the server. In other words the CA certificate must be present on client system in trusted certificate storage. This way the client can verify that certificate of the server was issued by trusted CA and connection could be established.
+
+For _self signed_ certificates it is common practice that client has to import root and/or intermediate certificate of CA to ensure self-signed certificate of the server is accepted. This is true for multiple scenarios including setting HTTPS on your web server using self-signed certificates or configuring docker client (dameon on client) that should talk to Container Regitry protected by self signed certificate.
+
+
+
