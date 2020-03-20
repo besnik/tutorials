@@ -3,7 +3,7 @@ Collection of tutorials for various libraries and technologies.
 
 ## List of tutorials
 
- - [Deploy Mongo DB as docker container with examples](https://github.com/besnik/mongo-as-docker-container) - Tutorial and sample scripts how to run Mongo DB as docker container using shell script and docker-compose.
+ - [Mongo DB as docker container](/mongo-as-docker-container) - Tutorial and sample scripts how to run Mongo DB as docker container.
  - [Docker-Mediawiki](/docker-mediawiki) - Run Mediawiki as docker image with data stored in mysql or sqlite db and host
  - [Docker-Mysql](/docker-mysql) - Run Mysql as docker image with data stored on the host
  - [Gunicorn](/gunicorn) - Run Django/Python apps with gunicorn WSGI http server
