@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+  #MONGO
+  mongo:
+    container_name: mongo
+    # Tune cache size for your specific production server!
+    # https://docs.mongodb.com/manual/reference/program/mongod/#wiredtiger-options
+    command: --auth
+    ports:
+      # open localhost to allow ssh tunel for direct mongo operations
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - "/srv/mongo-4.2.3/db:/data/db"
+    image: mongo:4.2.3
+    networks:
+      backend:
+        aliases:
+          - mongo
+    restart: always
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          memory: 500M # adjust to your needs
+      restart_policy:
+        condition: any
+        max_attempts: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10M"
+        max-file: "10"
+    ulimits:
+      nproc: 5000
+      nofile:
+        soft: 10000
+        hard: 40000
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+
+# https://docs.docker.com/compose/networking/
+# https://docs.docker.com/engine/reference/run/#network-settings
+# https://docs.docker.com/network/
+# https://docs.docker.com/network/bridge/
+networks:
+  # gunicorn -> databases
+  backend:
+    name: backend

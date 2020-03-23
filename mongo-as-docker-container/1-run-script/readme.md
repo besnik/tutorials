@@ -1,4 +1,4 @@
-# Run mongo docker container via shell script example
+# Run mongo docker container via shell script
 
 This example shows basic approach how to run mongo db as docker container using shell script. The example can be extended to add more complexity, limit resources, cpu, memory, etc as needed.
 

@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  #MONGO
+  mongo:
+    # Tune cache size for your specific production server!
+    # https://docs.mongodb.com/manual/reference/program/mongod/#wiredtiger-options
+    command: --auth --wiredTigerCacheSizeGB 0.25
+
+  # MONGO-EXPRESS. Optional GUI. Remove if not needed.
+  # mongo-express should only be used privately for development purposes
+  mongo-express:
+    image: mongo-express:0.54.0
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 127.0.0.1:8081:8081
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: ${MONGO_EXPRESS_USER}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${MONGO_EXPRESS_PASS}
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${MONGO_ADMIN_USER}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_ADMIN_PASS}
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_REQUEST_SIZE: "100kb"
+    networks:
+      backend:
+        aliases:
+          - mongo-express
