@@ -48,6 +48,5 @@ services:
 # https://docs.docker.com/network/
 # https://docs.docker.com/network/bridge/
 networks:
-  # gunicorn -> databases
   backend:
     name: backend
