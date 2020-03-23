@@ -175,6 +175,12 @@ docker-compose -f docker-compose.yml -f docker-compose.local.yml up --detach
 ```
 Note that the second `-f` references local docker-compose file, that will override values specified in first `-f` file.
 
+## 7. Summary
+
+Type `make up` to start mongo and mongo-express containers in custom backend network.
+
+Type `make down` to stop and remove mongo and mongo-express containers.
+
 ## Further steps
 
 A natural next step forward from here is to look after [Kubernetes](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/), [OpenShift](https://docs.openshift.com/container-platform/4.3/applications/deployments/what-deployments-are.html) or similar platforms and their deployment configs. Complexity of the platforms, the architecture and deployment configuration is topic for another tutorial.
