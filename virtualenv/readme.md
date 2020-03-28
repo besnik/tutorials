@@ -48,15 +48,55 @@ Switching between virtual environmetns and source code directories can require m
 There are tools that can simplify those tasks.
 
 ### VirtualEnvWrapper
-Virtualenvwrapper is tool with helper functions to easier switch and activate virtual environments.
+[Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) is tool with helper functions to easier switch and activate virtual environments.
 
 **Installation**
+
+Easiest way is to install using pip into global python:
 
 Windows: `pip install virtualenvwrapper-win`
 
 Linux: `pip install virtualenvwrapper`
 
-Setup WORKON_HOME environment variable with directory where you have virtual environments (e.g. c:\dev\envs)
+Setup WORKON_HOME environment variable with directory where you have virtual environments (e.g. c:\dev\envs).
+
+Add following files into your startup file (e.g. `.bashrc` or `.profile`) so the scripts are loaded into your shell:
+
+```
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/dev
+source /usr/local/bin/virtualenvwrapper.sh
+```
+
+See also [official installation](https://virtualenvwrapper.readthedocs.io/en/latest/install.html) documentation.
+
+**Create virtual environment**
+
+Type (`myapp` is name of your virtual environment):
+
+```
+mkvirtualenv myapp
+```
+
+**Show list of available virtual environments**
+
+```
+workon
+```
+
+**Switch to virtual environment**
+```
+workon myapp
+```
+
+**Delete virtual environment**
+
+Just delete folder where virtual environment was created. Path where virtual environments are created is specified by `WORKON_HOME` or look after default `.virtualenvs` folder in your home directory.
+
+```
+echo $WORKON_HOME
+rm -rf ${WORKON_HOME}/myapp
+```
 
 **Useful commands**
  - `workon` - lists available environments
@@ -75,7 +115,10 @@ Installation (if not already present):
 `sudo apt-get install virtualenv`
 
 Check where is python executable you want to use for virtual env:
-`which python3			# /usr/bin/python3`
+```
+which python3
+/usr/bin/python3
+```
 
 Create virtual env using python 3:
 

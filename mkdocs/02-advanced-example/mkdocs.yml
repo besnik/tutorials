@@ -1,0 +1,35 @@
+site_name: My MkDocs example site
+theme:
+  name: 'material'
+  logo:
+    icon: 'school'
+  palette:
+    primary: 'deep purple'
+    accent: 'deep purple'
+  feature:
+    tabs: false
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/squidfunk'
+    - type: 'twitter'
+      link: 'https://twitter.com/squidfunk'
+    - type: 'linkedin'
+      link: 'https://www.linkedin.com/in/squidfunk'
+markdown_extensions:
+    - codehilite
+    - admonition
+    - meta
+    - toc:
+        permalink: True
+    - pymdownx.details
+plugins:
+    - search:
+        lang: en
+    #- git-revision-date-localized:
+    #    type: iso_datetime # timeago
+nav:
+    - Home: index.md
+    - About: about.md
+    - Text examples: examples.md
+

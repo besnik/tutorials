@@ -5,7 +5,7 @@
 ## Prerequisities
 
 - [Python](https://www.python.org/) installed.
-- Python virtual environment created. Use [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) to manage virtual environments.
+- Python virtual environment created. Use [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) to manage virtual environments. See [virtual environment tutorial](/virtualenv) for more details.
 - [make](https://www.gnu.org/software/make/) tool for convenience (optional, very likely your linux already has it installed)
 - Examples were tested on [Ubuntu Linux](https://ubuntu.com/download/desktop)
 
