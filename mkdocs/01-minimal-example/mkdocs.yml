@@ -1,0 +1,7 @@
+site_name: My MkDocs example site
+theme:
+  name: 'material'
+nav:
+    - Home: index.md
+    - About: about.md
+    - Text examples: examples.md
